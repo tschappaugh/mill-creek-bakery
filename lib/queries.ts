@@ -20,3 +20,24 @@ export const GET_BREADS = `
     }
   }
 `
+export const GET_BREAD_BY_SLUG = `
+  query GetBreadBySlug($slug: ID!) {
+    bread(id: $slug, idType: SLUG) {
+      title
+      content
+      excerpt
+      slug
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      breadCategories {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+`

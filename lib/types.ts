@@ -24,3 +24,18 @@ export interface BreadsData {
     nodes: Bread[]
   }
 }
+
+export interface BreadSingle {
+  title: string
+  content: string
+  excerpt: string
+  slug: string
+  featuredImage: FeaturedImage
+  breadCategories: {
+    nodes: BreadCategory[]
+  }
+}
+
+export interface BreadSingleData {
+  bread: BreadSingle
+}
