@@ -5,17 +5,16 @@ if (!WORDPRESS_API_URL) {
   throw new Error('NEXT_PUBLIC_WORDPRESS_API_URL is not defined')
 }
 
-export async function fetchGraphQL<T>(query: string): Promise<T> {
-  if (!WORDPRESS_API_URL) {
-    throw new Error('NEXT_PUBLIC_WORDPRESS_API_URL is not defined')
-  }
-
+export async function fetchGraphQL<T>(
+  query: string,
+  variables?: Record<string, unknown>,
+): Promise<T> {
   const response = await fetch(WORDPRESS_API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   })
 
   if (!response.ok) {
