@@ -2,7 +2,7 @@ import { fetchGraphQL } from '@/lib/graphql-client'
 import { GET_BREADS } from '@/lib/queries'
 import { BreadsData, Bread } from '@/lib/types'
 import { stripHtml } from '@/lib/utils'
-import { Card } from '@/components/Card'
+import { Card } from '@tschappaugh/mill-creek-ui'
 
 export default async function BreadsPage() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)
