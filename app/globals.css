@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../node_modules/@tschappaugh/mill-creek-ui/dist/mill-creek-ui.js";
 
 :root {
   --background: #faf6f1;
