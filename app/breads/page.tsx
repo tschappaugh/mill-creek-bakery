@@ -15,7 +15,7 @@ export default async function BreadsPage() {
   ].sort()
 
   return (
-    <main className="min-h-screen bg-mill-background pt-16 lg:pt-24">
+    <main className="bg-mill-background pt-16 lg:pt-24">
       <div className="max-w-7xl mx-auto px-10 py-16">
         <ContentHeader
           level="h1"
