@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Cormorant_Garamond, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { NavWrapper } from './components/NavWrapper'
@@ -36,7 +37,11 @@ export default function RootLayout({
         <NavWrapper />
         {children}
         <Footer
-          logo={<Logo variant="dark" />}
+          logo={
+            <Link href="/">
+              <Logo variant="dark" width={237} height={64} />
+            </Link>
+          }
           links={siteConfig.footer.links}
           copyright={siteConfig.footer.copyright}
           socialLinks={siteConfig.footer.socialLinks}

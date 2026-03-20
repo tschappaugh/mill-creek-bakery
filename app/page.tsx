@@ -54,15 +54,22 @@ export default async function Home() {
       </section>
 
       <Separator className="mx-10" />
-
       <section className="max-w-7xl mx-auto px-10 py-20">
         <ContentHeader
           level="h2"
           heading="Come Find Us in Downtown Shawnee"
           body="We open early and stay open late so fresh bread fits into your day — whether you're on your morning commute or picking up something special on your way home."
-          className="mb-12"
+          className="mb-6"
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-2xl mx-auto font-sans text-base">
+        <div className="flex flex-col items-center gap-3 mb-12">
+          <h3 className="font-serif text-2xl font-normal text-mill-text-primary">
+            New to Mill Creek?
+          </h3>
+          <p className="font-sans text-base text-mill-text-primary max-w-[640px] text-center">
+            Sign up for our newsletter and <a href="https://244414312.hs-sites-na2.com/free-coupon-mill-creek-bakery-newsletter" className="text-mill-brand-dark underline hover:text-mill-brand-darker" target='_blank'>get a free loaf on your next visit</a>.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[640px] mx-auto font-sans text-base">
           <div>
             <p className="font-semibold text-mill-text-primary mb-3">Hours</p>
             <p className="text-mill-text-primary">Tuesday – Sunday</p>
