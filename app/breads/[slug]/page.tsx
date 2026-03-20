@@ -25,8 +25,8 @@ export default async function BreadPage({ params }: BreadPageProps) {
   const category = breadCategories.nodes[0]?.name ?? 'Bread'
 
   return (
-    <main className="min-h-screen bg-mill-background">
-      <div className="max-w-4xl mx-auto px-8 py-16">
+    <main className="min-h-screen bg-mill-background pt-16 lg:pt-24">
+      <div className="max-w-4xl mx-auto px-8 pb-16">
         <p className="font-sans text-sm uppercase tracking-widest text-mill-text-secondary mb-4">
           {category}
         </p>

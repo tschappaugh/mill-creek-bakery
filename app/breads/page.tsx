@@ -1,34 +1,29 @@
 import { fetchGraphQL } from '@/lib/graphql-client'
 import { GET_BREADS } from '@/lib/queries'
-import { BreadsData, Bread } from '@/lib/types'
-import { stripHtml } from '@/lib/utils'
-import { Card } from '@tschappaugh/mill-creek-ui'
+import { BreadsData } from '@/lib/types'
+import { ContentHeader } from '@tschappaugh/mill-creek-ui'
+import { BreadsContent } from './BreadsContent'
 
 export default async function BreadsPage() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)
   const breads = data.breads.nodes
 
+  const categories = [
+    ...new Set(
+      breads.flatMap((b) => b.breadCategories.nodes.map((c) => c.name))
+    ),
+  ].sort()
+
   return (
-    <main className="min-h-screen bg-mill-background">
-      <div className="max-w-7xl mx-auto px-20 py-16">
-        <h1 className="font-serif text-5xl font-light text-mill-text-primary leading-heading-xl mb-12">
-          Our Breads
-        </h1>
-        <div className="grid grid-cols-3 gap-6">
-          {breads.map((bread: Bread) => (
-            <Card
-              key={bread.slug}
-              title={bread.title}
-              excerpt={stripHtml(bread.excerpt)}
-              tag={bread.breadCategories.nodes[0]?.name ?? 'Bread'}
-              image={{
-                src: bread.featuredImage.node.sourceUrl,
-                alt: bread.featuredImage.node.altText,
-              }}
-              href={`/breads/${bread.slug}`}
-            />
-          ))}
-        </div>
+    <main className="min-h-screen bg-mill-background pt-16 lg:pt-24">
+      <div className="max-w-7xl mx-auto px-10 py-16">
+        <ContentHeader
+          level="h1"
+          heading="Our Breads"
+          body="Handcrafted from organic grains and natural levains, baked fresh every morning in Shawnee, Kansas."
+          className="mb-12"
+        />
+        <BreadsContent breads={breads} categories={categories} />
       </div>
     </main>
   )
