@@ -5,8 +5,10 @@ import { Card, FilterBar } from '@tschappaugh/mill-creek-ui'
 import { stripHtml } from '@/lib/utils'
 import type { Bread } from '@/lib/types'
 
+type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }
+
 interface BreadsContentProps {
-  breads: Bread[]
+  breads: SafeBread[]
   categories: string[]
 }
 

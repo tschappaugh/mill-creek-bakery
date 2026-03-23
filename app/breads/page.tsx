@@ -1,16 +1,25 @@
 import { fetchGraphQL } from '@/lib/graphql-client'
 import { GET_BREADS } from '@/lib/queries'
-import { BreadsData } from '@/lib/types'
+import { BreadsData, Bread } from '@/lib/types'
 import { ContentHeader } from '@tschappaugh/mill-creek-ui'
 import { BreadsContent } from './BreadsContent'
 
+type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }
+
 export default async function BreadsPage() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)
-  const breads = data.breads.nodes
+
+  const safeBreads = data.breads.nodes.filter((bread): bread is SafeBread => {
+    if (bread.featuredImage === null) {
+      console.warn(`[Mill Creek] "${bread.title}" is missing a featured image and will not be displayed.`)
+      return false
+    }
+    return true
+  })
 
   const categories = [
     ...new Set(
-      breads.flatMap((b) => b.breadCategories.nodes.map((c) => c.name))
+      safeBreads.flatMap((b) => b.breadCategories.nodes.map((c) => c.name))
     ),
   ].sort()
 
@@ -23,7 +32,7 @@ export default async function BreadsPage() {
           body="Handcrafted from organic grains and natural levains, baked fresh every morning in Shawnee, Kansas."
           className="mb-12"
         />
-        <BreadsContent breads={breads} categories={categories} />
+        <BreadsContent breads={safeBreads} categories={categories} />
       </div>
     </main>
   )

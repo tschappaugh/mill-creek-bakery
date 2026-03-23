@@ -13,7 +13,7 @@ export interface Bread {
   title: string
   excerpt: string
   slug: string
-  featuredImage: FeaturedImage
+  featuredImage: FeaturedImage | null
   breadCategories: {
     nodes: BreadCategory[]
   }
@@ -25,17 +25,10 @@ export interface BreadsData {
   }
 }
 
-export interface BreadSingle {
-  title: string
+export interface BreadSingle extends Bread {
   content: string
-  excerpt: string
-  slug: string
-  featuredImage: FeaturedImage
-  breadCategories: {
-    nodes: BreadCategory[]
-  }
 }
 
 export interface BreadSingleData {
-  bread: BreadSingle
+  bread: BreadSingle | null
 }

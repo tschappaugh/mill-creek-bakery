@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { fetchGraphQL } from '@/lib/graphql-client'
 import { GET_BREADS } from '@/lib/queries'
-import { BreadsData } from '@/lib/types'
+import { BreadsData, Bread } from '@/lib/types'
 import {
   Hero,
   ContentHeader,
@@ -11,13 +11,25 @@ import {
 } from '@tschappaugh/mill-creek-ui'
 import { HomeBreadGrid } from './components/HomeBreadGrid'
 
+type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }
+
+function filterSafeBreads(breads: Bread[]): SafeBread[] {
+  return breads.filter((bread): bread is SafeBread => {
+    if (bread.featuredImage === null) {
+      console.warn(`[Mill Creek] "${bread.title}" is missing a featured image and will not be displayed.`)
+      return false
+    }
+    return true
+  })
+}
+
 export default async function Home() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)
-  const breads = data.breads.nodes
+  const safeBreads = filterSafeBreads(data.breads.nodes)
 
   const categories = [
     ...new Set(
-      breads.flatMap((b) => b.breadCategories.nodes.map((c) => c.name))
+      safeBreads.flatMap((b) => b.breadCategories.nodes.map((c) => c.name))
     ),
   ].sort()
 
@@ -50,7 +62,7 @@ export default async function Home() {
           body="From naturally leavened sourdough to buttery croissants, every loaf and pastry is made with organic ingredients sourced from local farms and producers we trust."
           className="mb-10"
         />
-        <HomeBreadGrid breads={breads} categories={categories} />
+        <HomeBreadGrid breads={safeBreads} categories={categories} />
       </section>
 
       <Separator className="mx-10" />
@@ -66,13 +78,13 @@ export default async function Home() {
             New to Mill Creek?
           </h3>
           <p className="font-sans text-base text-mill-text-primary max-w-[640px] text-center">
-            Sign up for our newsletter and <a href="https://244414312.hs-sites-na2.com/free-coupon-mill-creek-bakery-newsletter" className="text-mill-brand-dark underline hover:text-mill-brand-darker" target='_blank'>get a free loaf on your next visit</a>.
+            Sign up for our newsletter and <a href="https://244414312.hs-sites-na2.com/free-coupon-mill-creek-bakery-newsletter" className="text-mill-brand-dark underline hover:text-mill-brand-darker" target="_blank" rel="noopener noreferrer">get a free loaf on your next visit</a>.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[640px] mx-auto font-sans text-base">
           <div>
             <p className="font-semibold text-mill-text-primary mb-3">Hours</p>
-            <p className="text-mill-text-primary">Tuesday – Sunday</p>
+            <p className="text-mill-text-primary">Wednesday – Sunday</p>
             <p className="text-mill-text-primary mb-4">7:30am – 8:00pm</p>
             <p className="text-mill-text-secondary text-sm">
               We're closed Monday and Tuesday — bread heroes need a break too.

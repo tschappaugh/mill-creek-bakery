@@ -5,8 +5,12 @@ import { Card, FilterBar } from '@tschappaugh/mill-creek-ui'
 import { stripHtml } from '@/lib/utils'
 import type { Bread } from '@/lib/types'
 
+const HOME_LIMIT = 6
+
+type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }
+
 interface HomeBreadGridProps {
-  breads: Bread[]
+  breads: SafeBread[]
   categories: string[]
 }
 
@@ -19,7 +23,8 @@ export function HomeBreadGrid({ breads, categories }: HomeBreadGridProps) {
           b.breadCategories.nodes.some((c) => c.name === active)
         )
       : breads
-    return [...list].sort((a, b) => a.title.localeCompare(b.title))
+    const sorted = [...list].sort((a, b) => a.title.localeCompare(b.title))
+    return active ? sorted : sorted.slice(0, HOME_LIMIT)
   }, [breads, active])
 
   return (
