@@ -1,6 +1,6 @@
 export const GET_BREADS = `
   {
-    breads {
+    breads(first: 100) {
       nodes {
         title
         excerpt

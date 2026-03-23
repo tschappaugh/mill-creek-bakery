@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../node_modules/@tschappaugh/mill-creek-ui/dist/mill-creek-ui.js";
 
 :root {
   --background: #faf6f1;
@@ -11,9 +12,14 @@
   --color-foreground: var(--foreground);
   --color-mill-background: #faf6f1;
   --color-mill-surface: #f2ebe1;
+  --color-mill-surface-dark: #ebe0d1;
+  --color-mill-surface-darker: #dcc8ad;
   --color-mill-text-primary: #2c1f14;
   --color-mill-text-secondary: #614e41;
   --color-mill-brand: #c1603a;
+  --color-mill-brand-dark: #b05835;
+  --color-mill-brand-darker: #894529;
+  --color-mill-brand-darkest: #62311e;
   --color-mill-accent: #e8c4b0;
   --color-mill-border: #d9d2ca;
 
@@ -33,7 +39,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--color-mill-text-primary);
   color: var(--foreground);
   font-family: var(--font-source-sans), Arial, sans-serif;
 }

@@ -1,8 +1,14 @@
-const WORDPRESS_API_URL = (process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
-  '') as string
+import DOMPurify from 'isomorphic-dompurify'
+
+const WORDPRESS_API_URL = (process.env.WORDPRESS_API_URL || '') as string
 
 if (!WORDPRESS_API_URL) {
-  throw new Error('NEXT_PUBLIC_WORDPRESS_API_URL is not defined')
+  throw new Error('WORDPRESS_API_URL is not defined')
+}
+
+interface GraphQLResponse<T> {
+  data: T
+  errors?: Array<{ message: string }>
 }
 
 export async function fetchGraphQL<T>(
@@ -21,6 +27,15 @@ export async function fetchGraphQL<T>(
     throw new Error(`GraphQL fetch failed: ${response.statusText}`)
   }
 
-  const { data } = await response.json()
-  return data
+  const result: GraphQLResponse<T> = await response.json()
+
+  if (result.errors?.length) {
+    throw new Error(`GraphQL error: ${result.errors[0].message}`)
+  }
+
+  return result.data
+}
+
+export function sanitizeHtml(html: string): string {
+  return DOMPurify.sanitize(html)
 }
