@@ -37,8 +37,8 @@ export const siteConfig: {
     ],
     copyright: '© 2026 Mill Creek Bakery, LLC',
     socialLinks: [
-      { platform: 'instagram', href: '#' },
-      { platform: 'pinterest', href: '#' },
+      { platform: 'instagram', href: 'https://www.instagram.com' },
+      { platform: 'pinterest', href: 'https://www.pinterest.com' },
     ],
   },
 }

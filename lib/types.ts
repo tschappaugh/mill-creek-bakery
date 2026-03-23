@@ -32,3 +32,5 @@ export interface BreadSingle extends Bread {
 export interface BreadSingleData {
   bread: BreadSingle | null
 }
+
+export type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }

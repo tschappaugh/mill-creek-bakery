@@ -2,7 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { fetchGraphQL } from '@/lib/graphql-client'
 import { GET_BREADS } from '@/lib/queries'
-import { BreadsData, Bread } from '@/lib/types'
+import { BreadsData } from '@/lib/types'
+import { filterSafeBreads } from '@/lib/utils'
 import {
   Hero,
   ContentHeader,
@@ -11,17 +12,7 @@ import {
 } from '@tschappaugh/mill-creek-ui'
 import { HomeBreadGrid } from './components/HomeBreadGrid'
 
-type SafeBread = Bread & { featuredImage: NonNullable<Bread['featuredImage']> }
-
-function filterSafeBreads(breads: Bread[]): SafeBread[] {
-  return breads.filter((bread): bread is SafeBread => {
-    if (bread.featuredImage === null) {
-      console.warn(`[Mill Creek] "${bread.title}" is missing a featured image and will not be displayed.`)
-      return false
-    }
-    return true
-  })
-}
+export const revalidate = 3600
 
 export default async function Home() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)

@@ -1,14 +1,38 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchGraphQL, sanitizeHtml } from '@/lib/graphql-client'
 import { GET_BREADS, GET_BREAD_BY_SLUG } from '@/lib/queries'
 import { BreadsData, BreadSingleData } from '@/lib/types'
+import { stripHtml } from '@/lib/utils'
 import { Badge } from '@tschappaugh/mill-creek-ui'
+
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   const data = await fetchGraphQL<BreadsData>(GET_BREADS)
   return data.breads.nodes.map((bread) => ({ slug: bread.slug }))
+}
+
+export async function generateMetadata({ params }: BreadPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const data = await fetchGraphQL<BreadSingleData>(GET_BREAD_BY_SLUG, { slug })
+  const bread = data.bread
+
+  if (!bread) return {}
+
+  return {
+    title: `${bread.title} | Mill Creek Bakery`,
+    description: stripHtml(bread.excerpt),
+    openGraph: {
+      title: bread.title,
+      description: stripHtml(bread.excerpt),
+      images: bread.featuredImage
+        ? [{ url: bread.featuredImage.node.sourceUrl, alt: bread.featuredImage.node.altText }]
+        : [],
+    },
+  }
 }
 
 interface BreadPageProps {
