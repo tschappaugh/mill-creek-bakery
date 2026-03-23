@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchGraphQL } from '@/lib/graphql-client'
+import { fetchGraphQL, sanitizeHtml } from '@/lib/graphql-client'
 import { GET_BREADS, GET_BREAD_BY_SLUG } from '@/lib/queries'
 import { BreadsData, BreadSingleData } from '@/lib/types'
 import { Badge } from '@tschappaugh/mill-creek-ui'
@@ -43,17 +43,21 @@ export default async function BreadPage({ params }: BreadPageProps) {
           {title}
         </h1>
         <div className="relative w-full aspect-[16/9] mb-10">
-          <Image
-            src={featuredImage.node.sourceUrl}
-            alt={featuredImage.node.altText}
-            fill
-            className="object-cover"
-            priority
-          />
+        {featuredImage && (
+          <div className="relative w-full aspect-[16/9] mb-10">
+            <Image
+              src={featuredImage.node.sourceUrl}
+              alt={featuredImage.node.altText}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
         </div>
         <div
           className="font-sans text-base text-mill-text-primary leading-body [&_p]:mb-5 [&_a]:text-mill-brand-dark [&_a]:underline [&_a:hover]:text-mill-brand-darker [&_a:active]:text-mill-brand-darkest max-w-none"
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
         />
       </div>
 

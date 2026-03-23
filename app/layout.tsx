@@ -34,8 +34,16 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${sourceSans3.variable} antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-mill-background focus:text-mill-text-primary focus:font-sans focus:text-sm focus:rounded focus:border focus:border-mill-border"
+        >
+          Skip to main content
+        </a>
         <NavWrapper />
-        {children}
+        <div id="main-content">
+          {children}
+        </div>
         <Footer
           logo={
             <Link href="/">
