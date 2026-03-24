@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'i0.wp.com',
+        hostname: '*.wp.com',
       },
     ],
   },
