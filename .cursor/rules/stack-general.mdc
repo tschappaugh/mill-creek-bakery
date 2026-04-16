@@ -1,0 +1,16 @@
+---
+description: Next.js stack and data-fetching conventions for app, lib, and config files
+globs: "{app,lib}/**/*.{ts,tsx},next.config.ts"
+alwaysApply: false
+---
+
+# Stack And Data Rules
+
+- This repo is a Next.js App Router frontend with TypeScript and Tailwind v4.
+- Prefer Server Components by default. Add `'use client'` only for hooks, event handlers, browser APIs, or GSAP animation code.
+- Fetch WordPress data only through `fetchGraphQL<T>` in `lib/graphql-client.ts`.
+- Define GraphQL query strings only in `lib/queries.ts`. Do not inline GraphQL queries in pages or components.
+- Keep GraphQL response types in `lib/types.ts`.
+- Use the server-only `WORDPRESS_API_URL` environment variable. Do not introduce `NEXT_PUBLIC_WORDPRESS_API_URL`.
+- Use single quotes and omit semicolons.
+- Prefer Tailwind utility classes and avoid arbitrary values unless they are clearly necessary.

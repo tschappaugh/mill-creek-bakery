@@ -1,0 +1,21 @@
+---
+description: GSAP and process-page animation conventions for animated section components
+globs: "components/process/**/*.tsx"
+alwaysApply: false
+---
+
+# Animation Rules
+
+- Use only GSAP free-tier features. Do not use Club GSAP plugins such as MorphSVG or SplitText.
+- Put GSAP code inside `useGSAP` from `@gsap/react`, not `useEffect`.
+- Register `ScrollTrigger` in each section component that uses it.
+- Use a scoped ref with `useGSAP` so cleanup happens automatically.
+- Keep animation logic inside the section component it belongs to. Do not move process-page animations into a global animation file.
+- Prefer timed entrance animations that play once on viewport entry.
+- Use scroll-scrubbed animation only when the interaction depends on scroll position, like the rotating disc in `TimeSection`.
+- Match the current process-page brief:
+  - `HeroSection`: full-width image, dark overlay, load-in copy reveal, subtle scroll parallax.
+  - `IngredientsSection`: three depth layers, timed entrance sequence, eggs last.
+  - `TimeSection`: rotating moon-to-sun disc with scrubbed scroll motion.
+  - `OvenSection`: looping steam elements over the oven scene.
+  - `ResultSection`: fade-and-scale image reveal with delayed copy.

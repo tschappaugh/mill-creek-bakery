@@ -1,0 +1,15 @@
+---
+description: Component structure and UI conventions for React and route components
+globs: "{app,components}/**/*.tsx"
+alwaysApply: false
+---
+
+# Component Rules
+
+- Use function components and keep them focused on a single UI concern.
+- Use Next.js `<Image>` instead of plain `<img>` tags.
+- Use Next.js `<Link>` for internal navigation instead of plain `<a>`.
+- Components in `app/` should stay server-rendered unless client behavior is required.
+- For the process page, keep `app/process/page.tsx` thin and render section components from `components/process/`.
+- Keep section-specific logic inside the section component instead of creating broad shared abstractions too early.
+- When using `@tschappaugh/mill-creek-ui`, pass required ReactNode props from the app side rather than reimplementing library components.
