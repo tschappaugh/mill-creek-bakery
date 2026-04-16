@@ -69,14 +69,13 @@ export function HeroSection() {
             data-hero-copy
             className="font-serif text-4xl leading-tight sm:text-5xl"
           >
-            Bread built with time, patience, and local ingredients
+            Small batches. Handcrafted dough. The French tradition.
           </h1>
           <p
             data-hero-copy
             className="mt-6 max-w-xl font-sans text-base text-white/85 sm:text-lg"
           >
-            Every loaf starts with patient fermentation, organic grain, and the
-            rhythm of an overnight bake built for flavor and texture.
+            We make bread the way it has been made in French boulangeries for generations — by hand, in small batches, with no shortcuts. Every loaf starts with locally sourced ingredients and a commitment to doing things the right way, even when that means starting work before most people set an alarm.
           </p>
         </div>
       </div>

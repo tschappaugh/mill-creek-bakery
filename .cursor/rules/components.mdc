@@ -13,3 +13,15 @@ alwaysApply: false
 - For the process page, keep `app/process/page.tsx` thin and render section components from `components/process/`.
 - Keep section-specific logic inside the section component instead of creating broad shared abstractions too early.
 - When using `@tschappaugh/mill-creek-ui`, pass required ReactNode props from the app side rather than reimplementing library components.
+- Follow the project layout rhythm unless design explicitly calls for a deviation:
+  - Section gutters: `px-8 lg:px-10`
+  - Major section spacing: `py-20`
+  - Wide containers: `max-w-7xl`
+  - Reading containers: `max-w-4xl` or `max-w-3xl`
+  - Header-to-content spacing: `mb-10` or `mb-12`
+- For process-page section composition, match these screenshot-driven defaults:
+  - Center-align section headings and supporting copy unless a section explicitly uses split layout.
+  - Keep body copy in narrow measures (`max-w-xl` or smaller) for readability.
+  - Use one primary visual focal point per section (ingredient cluster, disc, oven image, loaf image).
+  - Favor generous whitespace between focal visuals and following text blocks.
+  - On mobile, stack visuals above text and keep heading breaks short to avoid dense paragraphs.

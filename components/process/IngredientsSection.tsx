@@ -3,11 +3,10 @@ export function IngredientsSection() {
     <section className="mx-auto max-w-7xl px-8 py-20 lg:px-10">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="font-serif text-3xl text-mill-text-primary sm:text-4xl">
-          Local ingredients, layered with intention
+        Fresh, Locally Sourced Ingredients
         </h2>
         <p className="mt-5 font-sans text-base text-mill-text-secondary">
-          Scaffold in place for the timed ingredient entrance sequence and depth
-          layering.
+        Good bread begins long before the oven. We source our bread flour from Marian Milling, our milk and butter from Shatto Milk Company, and our eggs from Juarez Farm — ingredients from producers we trust, close to home. Our water comes from local springs, a nod to Shawnee's own history as Gum Springs, named by early settlers for the natural springs they found here. We finish every loaf with artisanal sea salt, because the small details are where the difference is made.
         </p>
       </div>
 

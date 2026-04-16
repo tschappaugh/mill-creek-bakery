@@ -3,11 +3,10 @@ export function ResultSection() {
     <section className="mx-auto max-w-7xl px-8 py-20 lg:px-10">
       <div className="rounded-2xl border border-mill-text-secondary/20 bg-white p-8 sm:p-12">
         <h2 className="font-serif text-3xl text-mill-text-primary sm:text-4xl">
-          The finished loaf
+        The Proof Is in the Result
         </h2>
         <p className="mt-5 max-w-2xl font-sans text-base text-mill-text-secondary">
-          Final section scaffold is ready for image fade-in, subtle scale, and
-          delayed copy reveal.
+        Everything comes together in the final loaf. The long ferment builds flavor. The steam opens the crumb. The deck oven delivers a crust that shatters when you cut it and stays crisp long after it leaves our hands. What you get is a large, irregular crumb with a soft, slightly chewy interior and a crust with real texture — the kind of bread that does not need anything added to it, but rewards whatever you bring to it.
         </p>
       </div>
     </section>
